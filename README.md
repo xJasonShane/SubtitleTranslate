@@ -1,0 +1,2 @@
+# SubtitleTranslate
+SubtitleTranslate旨在为用户提供字幕文本翻译功能，对常见字幕文件格式进行在线API翻译至用户指定语言文本。
