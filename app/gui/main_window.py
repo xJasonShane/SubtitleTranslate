@@ -68,8 +68,11 @@ class MainWindow(Tk):
         
         Label(lang_frame, text="目标语言: ").pack(side="left", padx=5)
         
-        self.lang_var = ttk.Combobox(lang_frame, values=["zh", "en", "ja", "ko", "fr", "de"], width=10)
-        self.lang_var.current(0)
+        # 创建语言映射字典（显示名称 -> 语言代码）
+        self.language_map = {"中文": "zh", "英文": "en", "日语": "ja", "韩语": "ko", "法语": "fr", "德语": "de"}
+        # 使用中文名称作为下拉选项
+        self.lang_var = ttk.Combobox(lang_frame, values=list(self.language_map.keys()), width=10)
+        self.lang_var.current(0)  # 默认选中中文
         self.lang_var.pack(side="left", padx=5)
         
         Button(lang_frame, text="翻译", command=self.translate_subtitle).pack(side="right", padx=5)
@@ -187,7 +190,8 @@ class MainWindow(Tk):
             messagebox.showwarning("警告", "请先在设置中配置API密钥")
             return
         
-        self.target_language = self.lang_var.get()
+        # 根据选择的中文名称获取对应的语言代码
+        self.target_language = self.language_map[self.lang_var.get()]
         
         try:
             # 清空翻译文本区域
